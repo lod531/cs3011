@@ -28,3 +28,9 @@ numeral(succ(X))  :-  numeral(X).
 greaterThan(succ(_), 0).
 
 greaterThan(succ(X), succ(Y)):-greaterThan(X, Y).
+
+%3.5
+
+swap(leaf(A), leaf(A)).
+swap(tree(A, B), swap(A1, B1)):- swap(A, B1), swap(B, A1). 
+
