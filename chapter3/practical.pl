@@ -18,5 +18,6 @@ connected(16,12).
 connected(14,17). 
 connected(16,19).
 
-isFirstConnectedToSecond(A, B):- connected(A, B).
-isFirstConnectedtoSecond(A, C):- connected(A, B), isFirstConnectedtoSecond(B, C).
+path(A, B):- connected(A, B).
+path(A, B):- connected(A, C), path(C, B).
+
