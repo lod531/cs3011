@@ -43,3 +43,9 @@ minus(X, Y)							:-simplify(X, Z), minusHelper(Z, Y).
 minusHelper(0, Y)					:- numeral(Y).
 minusHelper(s(X), p(Y))				:- minusHelper(X, Y).
 minusHelper(p(X), s(Y))				:- minusHelper(X, Y).
+
+%Exercise 5
+
+subtract(X, Y, Z)					:- minus(Y, Yn), add2(X, Yn, Z).
+subtract(-X, Y, Z)					:- minus(X, Xn), minus(Y, Yn), add2(Xn, Yn, Z).
+subtract(X, -Y, Z)					:- add2(X, Y, Z).
