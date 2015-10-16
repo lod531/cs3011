@@ -13,15 +13,18 @@ numeral(s(X)):- numeral(X).
 numeral(p(X)):- numeral(X).
 
 
-%Exercise 1 & 2
+%Exercise 1 & 2 & 4 & 5
 
 
 
+add2(-X, Y, Z)			:- minus(X, Xn), add2(Xn, Y, Z).
+add2(X, -Y, Z)			:- minus(Y, Yn), add2(X, Yn, Z).
 add2(X0+X1, Y0+Y1, Z)	:- add(X0, X1, Xs), add(Y0, Y1, Ys), add(Xs, Ys, Zs), simplify(Zs, Z).
-add2(X0+X1, Y, Z)		:- add(X0, X1, Xs), add(Xs, Y, Z).
-add2(X, Y0+Y1, Z)		:- add(Y0, Y1, Ys), add(X, Ys, Z).
-add2(X, Y, Z)			:- add(X, Y, Z).
+add2(X0+X1, Y, Z)		:- add(X0, X1, Xs), add(Xs, Y, Zs), simplify(Zs, Z).
+add2(X, Y0+Y1, Z)		:- add(Y0, Y1, Ys), add(X, Ys, Zs), simplify(Zs, Z).
+add2(X, Y, Z)			:- add(X, Y, Zs), simplify(Zs, Z).
 
+%Exercise 2 helper declarations
 
 
 simplify(W, Z)						:- simplifyHelper(W, 0, 0, Z).
