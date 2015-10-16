@@ -35,3 +35,8 @@ simplifyHelper(0, 0, p(Y), p(Z))	:- simplifyHelper(0, 0, Y, Z).
 
 %Exercise 3
 
+minus(X, Y)							:-simplify(X, Z), minusHelper(Z, Y).
+
+minusHelper(0, Y)					:- numeral(Y).
+minusHelper(s(X), p(Y))				:- minusHelper(X, Y).
+minusHelper(p(X), s(Y))				:- minusHelper(X, Y).
