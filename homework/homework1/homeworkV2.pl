@@ -7,7 +7,7 @@ numeral(X-Y):- numeral(X), numeral(Y).
 numeral(s(X)):- numeral(X).
 numeral(p(X)):- numeral(X).
 
-%Exercise 1 
+%Exercise 1 & 2 & 4 & 6 
 
 
 add2(0, 0, 0).
@@ -22,9 +22,15 @@ add2(X0-X1, Y, Z)		:- subtract(X0, X1, Xs), add2(Y, 0, Ys),
 %Exercise 2 helper declarations
 
 
-simplify(W, Z)						:- simplifyHelper(W, 0, 0, Z).
+simplify(W, Z)				:- simplifyHelper(W, 0, 0, Z).
 
-simplifyHelper(0, 0, 0, Z)			:- numeral(Z).
+
+%So this is how this works: X is a stack for s()'s and Y is a stack for p()'s
+%when the first argument is finally 0, all s()'s and p()'s have been pushed
+%onto the stacks. Then they're popped, both at a time, until only s()'s or p()'s
+%remain, at which point the remaining s()'s or p()'s are tallied up.
+ 
+simplifyHelper(0, 0, 0, Z)		:- numeral(Z).
 simplifyHelper(s(W), X, Y, Z)		:- simplifyHelper(W, s(X), Y, Z).
 simplifyHelper(p(W), X, Y, Z)		:- simplifyHelper(W, X, p(Y), Z).
 simplifyHelper(0, s(X), p(Y), Z)	:- simplifyHelper(0, X, Y, Z).
@@ -41,5 +47,4 @@ minusHelper(p(X), s(Y))				:- minusHelper(X, Y).
 
 %Exercise 5
 
-subtract(X, Y, Z)				:- add2(X, 0, Xs), add2(Y, 0, Ys), minus(Ys, Yss),
-							add2(Xs, Yss, Zs), simplify(Zs, Z).	
+subtract(X, Y, Z)				:- add2(X, -Y, Zs), simplify(Zs, Z). 
